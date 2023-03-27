@@ -1,0 +1,21 @@
+version: '2.10.2'
+
+services:
+  redis:
+    image: redis:5.0.7
+    container_name: docker-compose-redis
+    ports:
+      - 6380:6380
+    volumes:
+      - ./data:/data
+      - ./conf/redis.conf:/etc/redis/redis.conf
+      - ./logs:/logs
+    command:
+      redis-server /etc/redis/redis.conf
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+        reservations:
+          memory: 200M
